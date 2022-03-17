@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "A \"Create Account\" and \"Login\" system template with encryption, JWT token sessions, email confirmation and Redis Client. # api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdhilts/api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdhilts/api/issues"
+  },
+  "homepage": "https://github.com/jdhilts/api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.3",
+    "knex": "^1.0.4",
+    "nodemailer": "^6.7.2",
+    "pg": "^8.7.3"
+  }
+}

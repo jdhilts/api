@@ -4,6 +4,7 @@
   "description": "A \"Create Account\" and \"Login\" system template with encryption, JWT token sessions, email confirmation and Redis Client. # api",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

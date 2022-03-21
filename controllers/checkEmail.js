@@ -31,6 +31,14 @@ const insertUser =(req, res, pg, bcrypt)=> {
 	//Encrypt the user's password for extra security.	
 	const encrypted = bcrypt.hashSync(password)
 
+	//Generate unique random number to send to the user to verify user
+	let length = 8
+	let verification_code = ''
+	for(let i = 0; i < length; i++){
+		const verificationCode = Math.floor((Math.random() * 10) + 1)
+		verification_code += verificationCode
+	}
+
 	pg('users')
 	.returning(['email','id'])
 	.insert({
@@ -38,11 +46,13 @@ const insertUser =(req, res, pg, bcrypt)=> {
 		last_name: last_name,
 		email: email,
 		password: encrypted,
-		date_created: new Date()
+		date_created: new Date(),
+		verified: false,
+		verification_code: verification_code
 	})
 	.then(user => {
 		//After the insert the emailConfirmation function will be called next.
-		emailConfirmation(req, res, pg, email)
+		emailConfirmation(req, res, pg, email, verification_code)
 		//If the insert is successful then a response with the email and id 
 		//will be sent to the fron end as user.
 		res.json(user[0])
@@ -50,7 +60,7 @@ const insertUser =(req, res, pg, bcrypt)=> {
 	.catch(error => Promise.reject(error))
 }
 //Send the email confirmation to the user
-const emailConfirmation =(req, res, pg, email)=> {
+const emailConfirmation =(req, res, pg, email, verification_code)=> {
   //Email transporter is where the email is being sent from.
   //This is an example using ethereal as a test service
   const transporter = nodemailer.createTransport({
@@ -66,7 +76,8 @@ const emailConfirmation =(req, res, pg, email)=> {
   from: 'toby.watsica42@ethereal.email',
   to: email,
   subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+  text: 'That was easy!',
+  html: `<p>Click <button><a href="http://localhost:3000/verify_user/:${verification_code}">Confirm</a></button> to confirm your email address.</p>`
 }
 //Finally send the mail.
 transporter.sendMail(mailOptions, (error, info)=> {

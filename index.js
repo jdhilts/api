@@ -25,8 +25,9 @@ const pg = knex({
 //const corsOptions({})
 //app.use(cors)
 
-app.get('/', (req, res)=> {res.send('Hello User')})
+app.get('/', (req, res)=> res.send('Hello User'))
 app.post('/create_account', (req, res)=> createAccount.checkEmail(req, res, pg, bcrypt))
+app.get('/login', (req, res)=> res.send('This is the Login Page.'))
 
 app.listen(port,() => {console.log(`Listening to port ${port}.`)})
 

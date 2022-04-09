@@ -1,9 +1,8 @@
 // Update with your config settings.
-
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+ module.exports = {
   development: {
     client: 'pg',
     version: '8.7.3',
@@ -16,11 +15,9 @@ module.exports = {
     }
   },
   production: {
-    client: 'pg',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    }
-  }
+      connectionString: process.env.DATABASE_URL,
+      ssl:{
+        rejectionUnauthorized: false
+      }
+  }   
 };

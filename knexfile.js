@@ -15,6 +15,7 @@
     }
   },
   production: {
+      client: 'pg',
       connectionString: process.env.DATABASE_URL,
       ssl:{
         rejectionUnauthorized: false

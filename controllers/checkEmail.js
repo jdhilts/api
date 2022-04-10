@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer')
 const checkEmail =(req, res, pg, bcrypt)=> {
 	
 	const {email} = req.body
+	
 	pg('users')
 	.select('email')
 	.where({email: email})

@@ -11,9 +11,15 @@ const createAccount = require('./controllers/checkEmail')
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(cors())
 
 //Create corsOptions before deploying to production.
+const corsOptions = {
+        "origin": "https://floating-taiga-61002.herokuapp.com",
+        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+        "preflightContinue": false,
+        "optionsSuccessStatus": 204
+}
+app.use(cors(corsOptions))
 
 app.get('/', (req, res)=> res.send('Hello User'))
 app.post('/create_account', (req, res)=> createAccount.checkEmail(req, res, pg, bcrypt))

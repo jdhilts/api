@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 //Create corsOptions before deploying to production.
 const corsOptions = {
         "origin": "https://floating-taiga-61002.herokuapp.com",
-        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+        "methods": "OPTIONS, GET, HEAD, PUT, PATCH, POST, DELETE",
         "preflightContinue": false,
         "optionsSuccessStatus": 200
 }

@@ -6,7 +6,7 @@ const checkEmail =(req, res, pg, bcrypt)=> {
 	
 	const {email} = req.body
 	
-	pg('users')
+	pg.from('users')
 	.select('email')
 	.where({email: email})
 	.then(email => {		

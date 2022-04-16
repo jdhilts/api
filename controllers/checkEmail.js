@@ -45,7 +45,7 @@ const insertUser =(req, res, pg, bcrypt)=> {
 		emailConfirmation(req, res, pg, email)
 		//If the insert is successful then a response with the email and id 
 		//will be sent to the fron end as user.
-		res.json(user[0])
+		res.json(user[0].email)
 	})
 	.catch(error => Promise.reject(error))
 }

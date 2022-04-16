@@ -9,20 +9,21 @@ const cors = require('cors')
 const createAccount = require('./controllers/checkEmail')
 
 const app = express()
+app.use(cors)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
 //Create corsOptions before deploying to production.
 const corsOptions = {
-        "origin": "https://floating-taiga-61002.herokuapp.com",
-        "methods": "OPTIONS, GET, HEAD, PUT, PATCH, POST, DELETE",
-        "preflightContinue": false,
-        "optionsSuccessStatus": 200
+        origin: 'https://floating-taiga-61002.herokuapp.com',
+        methods: 'OPTIONS, POST',
+        preflightContinue: false,
+        optionsSuccessStatus: 200
 }
-app.use(cors(corsOptions))
+
 
 app.get('/', (req, res)=> res.send('Hello User'))
-app.post('/create_account', (req, res)=> createAccount.checkEmail(req, res, pg, bcrypt))
+app.post('/create_account', app.use(cors(corsOptions)), (req, res)=> createAccount.checkEmail(req, res, pg, bcrypt))
 app.get('/login', (req, res)=> res.send('This is the Login Page.'))
 
 app.listen(PORT,() => {console.log(`Listening to port ${PORT}.`)})

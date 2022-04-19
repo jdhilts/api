@@ -16,6 +16,7 @@
   },
   production: {
       client: 'pg',
+      version: '8.7.3',
       connectionString: process.env.DATABASE_URL,
       ssl:{
         rejectionUnauthorized: false

@@ -4,11 +4,9 @@ const nodemailer = require('nodemailer')
 //Check the database for duplicate email.
 const checkEmail =(req, res, pg, bcrypt)=> {
 	
-	const {email} = req.body
-	
 	pg.from('users')
 	.select('email')
-	.where({email: email})
+	.where({email: req.body.email})
 	.then(email => {		
 		// If there is no email then the insertUser function is called.
 		!email[0] ? insertUser(req, res, pg, bcrypt)
@@ -26,17 +24,15 @@ const checkEmail =(req, res, pg, bcrypt)=> {
 //Insert the user to the database.
 const insertUser =(req, res, pg, bcrypt)=> {
 
-	const {first_name, last_name, email, password} = req.body
-
 	//Encrypt the user's password for extra security.	
 	const encrypted = bcrypt.hashSync(password)
 
 	pg('users')
 	.returning(['email','id'])
 	.insert({
-		first_name: first_name,
-		last_name: last_name,
-		email: email,
+		first_name: req.body.first_name,
+		last_name: req.body.last_name,
+		email: req.body.email,
 		password: encrypted,
 		date_created: new Date()
 	})

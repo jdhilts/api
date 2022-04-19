@@ -1,9 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
-const environment = process.env.NODE_ENV || 'development'
-const config = require('./knexfile')[environment]
-const pg = require('knex')(config)
+const pg = require('knex/knex')
 const PORT = process.env.PORT || 3000
 const cors = require('cors')
 const createAccount = require('./controllers/checkEmail')

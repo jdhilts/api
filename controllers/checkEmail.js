@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer')
 
 //Check the database for duplicate email.
 const checkEmail =(req, res, pg, bcrypt)=> {
-	
-	pg.from('users')
+
+	pg('users')
 	.select('email')
 	.where({email: req.body.email})
 	.then(email => {		

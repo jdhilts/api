@@ -8,12 +8,13 @@ const createAccount = require('./controllers/checkEmail')
 
 const app = express()
 //Create corsOptions before deploying to production.
-app.use(cors(corsOptions = {
-        origin: 'https://floating-taiga-61002.herokuapp.com',
-        methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
-        preflightContinue: false,
-        optionsSuccessStatus: 204
-}))
+app.use(cors())
+// app.use(cors(corsOptions = {
+//         origin: 'https://floating-taiga-61002.herokuapp.com',
+//         methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+//         preflightContinue: false,
+//         optionsSuccessStatus: 204
+// }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 

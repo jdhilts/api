@@ -5,8 +5,8 @@ const nodemailer = require('nodemailer')
 const checkEmail =(req, res, pg, bcrypt)=> {
 
 	pg('users')
-	.select('email')
 	.where({email: req.body.email})
+	.select('email')
 	.then(email => {		
 		// If there is no email then the insertUser function is called.
 		!email[0] ? insertUser(req, res, pg, bcrypt)
